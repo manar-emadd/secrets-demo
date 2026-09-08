@@ -1,36 +1,36 @@
-name: secrets Demo  
+name: Secrets Demo
 
 on:
   push:
     branches: [main]
 
 jobs:
-  show-secret: 
+  show-secret:
     runs-on: ubuntu-latest
-
-    steps: 
+    steps:
       - name: Print the secret message
         env:
           MY_SECRET: ${{ secrets.SECRET_MESSAGE }}
+        run: echo "The secret says:$MY_SECRET"
 
-        run: echo "The secret says:$MY_SECRET"  
   matrix-test:
     runs-on: ubuntu-latest
     strategy:
-      matrix: 
-        python-version: ['3.9','3.10','3.11'] 
+      matrix:
+        python-version: ['3.9', '3.10', '3.11']
 
     steps:
-      - name: show which python version 
-        run: echo "Running on python ${{matrix.python-version }}"  
+      - name: Show which Python version
+        run: echo "Running on Python ${{ matrix.python-version }}"
 
-      - name: Set up python ${{matrix.python-version}} 
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
-
         with:
-          python-version: ${{matrix.python-version}}
-      - name: confirm python version
+          python-version: ${{ matrix.python-version }}
+
+      - name: Confirm Python version
         run: python --version
 
-
-        
+      - name: Special message for Python 3.11 only
+        if: matrix.python-version == '3.11'
+        run: echo "🎉 This is the latest version we're testing!"
