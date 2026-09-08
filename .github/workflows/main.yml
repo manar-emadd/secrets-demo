@@ -1,0 +1,15 @@
+name: secrets Demo  
+
+on: push
+
+jobs:
+  show-secret: 
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Print the secret message
+        env:
+          MY_SECRET: ${{ secrets.SECRET_MESSAGE }}
+
+        run: echo "The secret says: $MY_SECRET"  
+    
