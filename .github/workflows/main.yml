@@ -11,5 +11,5 @@ jobs:
         env:
           MY_SECRET: ${{ secrets.SECRET_MESSAGE }}
 
-        run: echo "The secret says: $MY_SECRET"  
+        run: echo "The secret says:$MY_SECRET"  
     
